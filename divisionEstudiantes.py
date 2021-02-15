@@ -84,11 +84,16 @@ def Code():
         listGroups[g].topics.append(listTopics[top])
         del listTopics[top]
 
-    for g in listGroups:
-        print("##########################")
-        print(g.name)
-        print("Members:")
-        print("\t" + str(g.members))
-        print("Temas:")
-        print("\t"+str(g.topics))
+    return listGroups
+
+finalGroups = Code()
+
+for g in finalGroups:
+    print("##########################")
+    print(g.name)
+    print("Members:")
+    print("\t" + str(g.members))
+    print("Temas:")
+    print("\t"+str(g.topics))
+        
 Code()
