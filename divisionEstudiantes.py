@@ -6,24 +6,25 @@ import random
 
 class Group:
 
+
     def __init__(self,name,members,topics):
 
         self.name = name
         self.members = members
         self.topics = topics
-        
+
 #verificacion de la entrada
-
-try:
-    students = sys.argv[1]
-    topics = sys.argv[2]
-    groups = sys.argv[3]
-except:
-    print("La cantidad de parametros introducidos por consola es incorrecta")
-    print("Ej: $divisionEstudiantes.py est.txt temas.txt #entero")
-    sys.exit(1)
-
-def Code():
+def Verificacion():
+    try:
+        students = sys.argv[1]
+        topics = sys.argv[2]
+        groups = sys.argv[3]
+    except:
+        print("La cantidad de parametros introducidos por consola es incorrecta")
+        print("Ej: $divisionEstudiantes.py est.txt temas.txt #entero")
+        sys.exit(1)
+    return students,topics, int(groups)
+def Code(students,topics,groups):
     #crear las listas
     listStudents = []
     listTopics = []
@@ -37,14 +38,14 @@ def Code():
         for t in fileTop.read().split("\n"):
             listTopics.append(t)
         fileStu.close()
-    for i in range(int(groups)):
+    for i in range(groups):
         g = Group("Group#"+str(i+1),[],[])
         listGroups.append(g)
-           
+
     #repartir los estudiantes
 
     totalStudents = len(listStudents)
-    totalGroups = int(groups)
+    totalGroups = groups
 
     cantMembers = totalStudents // totalGroups
     restMembers = totalStudents % totalGroups
@@ -70,7 +71,7 @@ def Code():
 
     cantTopics = totalTopics // totalGroups
     restTopics = totalTopics % totalGroups
-    
+
     randomGroup3 = random.sample(range(0,totalGroups),totalGroups)
     for g in randomGroup3:
         for s in range(cantTopics):
@@ -86,14 +87,16 @@ def Code():
 
     return listGroups
 
-finalGroups = Code()
+def main():
+    students,topics,groups = Verificacion()
+    finalGroups = Code(students,topics,groups)
+    for g in finalGroups:
+        print("##########################")
+        print(g.name)
+        print("Members:")
+        print("\t" + str(g.members))
+        print("Temas:")
+        print("\t"+str(g.topics))
 
-for g in finalGroups:
-    print("##########################")
-    print(g.name)
-    print("Members:")
-    print("\t" + str(g.members))
-    print("Temas:")
-    print("\t"+str(g.topics))
-        
-Code()
+if __name__ == '__main__':
+    main()
