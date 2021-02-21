@@ -24,28 +24,36 @@ def Verificacion():
         print("Ej: $divisionEstudiantes.py est.txt temas.txt #entero")
         sys.exit(1)
     return students,topics, int(groups)
-def Code(students,topics,groups):
-    #crear las listas
+
+def lecturaArchivos(file1,file2):
     listStudents = []
     listTopics = []
-    listGroups = []
 
-    with open(students)as fileStu:
+    with open(file1)as fileStu:
         for s in fileStu.read().split("\n"):
             listStudents.append(s)
         fileStu.close()
-    with open(topics) as fileTop:
+
+    with open(file2) as fileTop:
         for t in fileTop.read().split("\n"):
             listTopics.append(t)
         fileStu.close()
+
+    return listStudents, listTopics
+
+
+def Code(listStud,listTopi,groups):
+
+    listStudents = listStud.copy()
+    listTopics = listTopi.copy()
+    listGroups = []
+    #repartir los estudiantes
     for i in range(groups):
         g = Group("Group#"+str(i+1),[],[])
         listGroups.append(g)
 
-    #repartir los estudiantes
-
     totalStudents = len(listStudents)
-    totalGroups = groups
+    totalGroups = len(listGroups)
 
     cantMembers = totalStudents // totalGroups
     restMembers = totalStudents % totalGroups
@@ -89,7 +97,8 @@ def Code(students,topics,groups):
 
 def main():
     students,topics,groups = Verificacion()
-    finalGroups = Code(students,topics,groups)
+    students2, topics2 = lecturaArchivos(students, topics)
+    finalGroups = Code(students2,topics2,groups)
     for g in finalGroups:
         print("##########################")
         print(g.name)

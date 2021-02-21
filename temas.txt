@@ -1,7 +1,10 @@
-tema1
-tema2
-tema3
-tema4
-tema5
-tema6
-tema7
+Agile (Basic or "Pure")
+Agile in the large: SAFeA vs LeSSA
+Scrum
+XP
+TDD
+OO Programming
+Functional Programming
+Distributed Version Control System
+Workspace design
+Remote Working and Studying
